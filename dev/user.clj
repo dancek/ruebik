@@ -1,3 +1,5 @@
 (ns user
-  (:require [clojure.tools.namespace.repl :refer [refresh]]
-            [ruebik.core :refer :all]))
+  (:require [clojure.tools.namespace.repl :refer [refresh]])
+  (:use [ruebik.core]
+        [ruebik.heuristic]
+        [ruebik.solved]))
