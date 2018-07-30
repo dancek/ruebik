@@ -28,9 +28,9 @@
         piece))))
 
 (defn rotate
-  "Do a rotation, eg. (rotate cube :u)"
-  [cube face]
-  (mapv (rotate-piece face) cube))
+  "Do one or many rotations, eg. (rotate cube :u :f :f :d)"
+  ([cube face] (mapv (rotate-piece face) cube))
+  ([cube face & faces] (reduce rotate cube (cons face faces))))
 
 
 (defn neighbors
@@ -42,3 +42,10 @@
         rot-2   (map rotate rot-fwd fwd-ring)
         rot-bwd (map rotate rot-2 fwd-ring)]
     (concat rot-fwd rot-bwd)))
+
+(defn scramble
+  ([cube] (scramble cube 100))
+  ([cube depth]
+   (if (= depth 0)
+     cube
+     (recur (rand-nth (neighbors cube)) (dec depth)))))
