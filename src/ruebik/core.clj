@@ -33,8 +33,12 @@
   (mapv (rotate-piece face) cube))
 
 
+(defn neighbors
+  "Neighbors of a cube position, ie. ones that can be reached with a single rotation.
 
-;;; TODO:
-; - check if solved
-; - counterclockwise rotations
-; - actual solving, argh
+  We consider quarter rotations in both directions but not half rotations."
+  [cube]
+  (let [rot-fwd (map #(rotate cube %) fwd-ring)
+        rot-2   (map rotate rot-fwd fwd-ring)
+        rot-bwd (map rotate rot-2 fwd-ring)]
+    (concat rot-fwd rot-bwd)))
